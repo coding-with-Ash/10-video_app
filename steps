@@ -1,0 +1,22 @@
+pip install face-recognition
+if error in face_recognition
+download from url:
+    https://github.com/RvTechiNNovate/face_recog_dlib_file
+Go to Terminal
+    ## for Python 3.8 64 bit
+    pip install .\face_recog_dlib_file-master\dlib-19.19.0-cp38-cp38-win_amd64.whl
+
+    ## for Python 3.7 64 bit
+    pip install .\face_recog_dlib_file-master\dlib-19.19.0-cp37-cp37m-win_amd64.whl
+
+pip install cmake
+pip install face-recognition
+pip install streamlit opencv-python
+
+#############################################################################
+## Images stored in RECORDING_DIR
+c:\ash\ash youtube\05 - coding_with_ash\venv\lib\site-packages\streamlit\static\output\recording
+
+
+## is ur webcam is not good, and wanna use some other camera, use mozilla firefox as chrome doesn't allow u to change the camera
+
