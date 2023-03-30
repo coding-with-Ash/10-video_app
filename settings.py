@@ -110,7 +110,8 @@ def face_distance_to_conf(face_distance, face_match_threshold=0.6):
     else:
         range = face_match_threshold
         linear_val = 1.0 - (face_distance / (range * 2.0))
-        return linear_val + ((1.0 - linear_val) * np.power((linear_val - 0.5) * 2, 0.2))
+        return linear_val + ((1.0 - linear_val) * np.power(
+            (linear_val - 0.5) * 2, 0.2))
 
 #################################################################
 def attendance(id, name):
@@ -137,32 +138,38 @@ def attendance(id, name):
 def view_attendace():
     f_p = os.path.join(VISITOR_HISTORY, file_history)
     # st.write(f_p)
-    df_attendace_temp = pd.DataFrame(columns=["id", "visitor_name", "Timing"])
+    df_attendace_temp = pd.DataFrame(columns=["id",
+                                              "visitor_name", "Timing"])
 
     if not os.path.isfile(f_p):
         df_attendace_temp.to_csv(f_p, index=False)
     else:
         df_attendace_temp = pd.read_csv(f_p)
 
-    df_attendace = df_attendace_temp.sort_values(by='Timing', ascending=False)
+    df_attendace = df_attendace_temp.sort_values(by='Timing',
+                                                 ascending=False)
     df_attendace.reset_index(inplace=True, drop=True)
 
     st.write(df_attendace)
 
-    id_chk  = df_attendace.loc[0, 'id']
-    id_name = df_attendace.loc[0, 'visitor_name']
+    if df_attendace.shape[0]>0:
+        id_chk  = df_attendace.loc[0, 'id']
+        id_name = df_attendace.loc[0, 'visitor_name']
 
-    selected_img = st.selectbox('Search Image using ID', options=['None']+list(df_attendace['id']))
+        selected_img = st.selectbox('Search Image using ID',
+                                    options=['None']+list(df_attendace['id']))
 
-    avail_files = [file for file in list(os.listdir(VISITOR_HISTORY)) if ((file.endswith(tuple(allowed_image_type))) &
-                                                                          (file.startswith(selected_img) == True))]
+        avail_files = [file for file in list(os.listdir(VISITOR_HISTORY))
+                       if ((file.endswith(tuple(allowed_image_type))) &
+                                                                              (file.startswith(selected_img) == True))]
 
-    if len(avail_files)>0:
-        selected_img_path = os.path.join(VISITOR_HISTORY, avail_files[0])
-        #st.write(selected_img_path)
+        if len(avail_files)>0:
+            selected_img_path = os.path.join(VISITOR_HISTORY,
+                                             avail_files[0])
+            #st.write(selected_img_path)
 
-        ## Displaying Image
-        st.image(Image.open(selected_img_path), caption=id_name)
+            ## Displaying Image
+            st.image(Image.open(selected_img_path))
 
 
 ########################################################################################################################
